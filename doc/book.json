@@ -1,0 +1,9 @@
+{ 
+    "plugins": ["folding-menu"] ,
+    "pluginsConfig": {
+        "folding-menu":	{
+          "animationDuration": 250,
+          "sticky":            false
+        }
+      }
+}
