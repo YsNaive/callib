@@ -1,0 +1,6 @@
+{
+  "devDependencies": {
+    "gitbook-plugin-folding-menu": "^1.0.1",
+    "honkit": "^4.0.4"
+  }
+}
