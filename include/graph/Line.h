@@ -7,7 +7,7 @@
 namespace callib {
     class Line : public GraphObject {
     public:
-        GraphType getType() const { return GraphType::LINE; };
+        E_GraphType getType() const { return E_GraphType::LINE; };
 
         Point begin;
         Point end;
@@ -21,6 +21,9 @@ namespace callib {
         struct Equation
         {
             double a, b;
+            bool isVertical;
+
+            friend std::ostream& operator<<(std::ostream& os, const Line::Equation& e);
         };
         // y = ax+b
         Line::Equation equation() const;

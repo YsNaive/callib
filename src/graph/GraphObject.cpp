@@ -3,10 +3,10 @@
 namespace callib {
 	std::string GraphObject::getTypeName() const
 	{
-		static std::map<GraphType, std::string> type2str = {
-			{GraphType::POINT, "Point"},
-			{GraphType::LINE, "Line"},
-			{GraphType::ARC, "Arc"}
+		static std::map<E_GraphType, std::string> type2str = {
+			{E_GraphType::POINT, "Point"},
+			{E_GraphType::LINE, "Line"},
+			{E_GraphType::ARC, "Arc"}
 		};
 		return type2str[this->getType()];
 	}

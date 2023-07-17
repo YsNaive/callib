@@ -7,13 +7,12 @@ namespace callib {
 #define RAD2DEG 57.2957795
 	class settings {
 	public:
-		// only apply when different result (ex. result of atan2)
-		static int roundingDigits;
+		static double doubleError;
 	};
-	double roundTo(double val, int digits);
-	double callibRound(double val);
 
-	enum Direction {
+	bool lf_equal(double a, double b);
+
+	enum E_Direction {
 		ClockWise,
 		CounterClockWise,
 		
@@ -23,7 +22,7 @@ namespace callib {
 		Right
 	};
 
-	enum GraphType
+	enum E_GraphType
 	{
 		POINT,
 		LINE,

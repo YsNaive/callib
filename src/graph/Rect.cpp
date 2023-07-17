@@ -8,13 +8,13 @@ namespace callib {
     {
         x = 0; y = 0; width = 0; height = 0;
         auto type = obj.getType();
-        if (type == GraphType::POINT) {
+        if (type == E_GraphType::POINT) {
             Point& p = (Point&)obj;
             x = p.x;
             y = p.y;
             return;
         }
-        if (type == GraphType::LINE) {
+        if (type == E_GraphType::LINE) {
             Line& l = (Line&)obj;
             x = std::min(l.begin.x, l.end.x);
             y = std::min(l.begin.y, l.end.y);
@@ -85,11 +85,11 @@ namespace callib {
     bool Rect::isCover(const GraphObject& obj)
     {
         auto type = obj.getType();
-        if (type == GraphType::POINT) {
+        if (type == E_GraphType::POINT) {
             Point& p = (Point&)obj;
             return ((p.x >= x) && (p.x <= xMax()) && (p.y >= y) && (p.y <= yMax()));
         }
-        if (type == GraphType::LINE) {
+        if (type == E_GraphType::LINE) {
             Line& l = (Line&)obj;
             return  ((l.begin.x >= x) && (l.begin.x <= xMax()) && (l.begin.y >= y) && (l.begin.y <= yMax())) &&
                     ((l.end.x >= x) && (l.end.x <= xMax()) && (l.end.y >= y) && (l.end.y <= yMax()));

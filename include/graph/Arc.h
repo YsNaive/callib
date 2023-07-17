@@ -8,15 +8,15 @@
 namespace callib {
     class Arc : public GraphObject {
     public:
-        GraphType getType() const { return GraphType::ARC; };
+        E_GraphType getType() const { return E_GraphType::ARC; };
 
         Point center;
         double radius;
         Angle beginAngle;
         Angle endAngle;
-        Direction direction;
+        E_Direction direction;
 
-        Arc(const Point& center = Point(), double radius = 0, const Angle& startAngle = 0, const Angle& endAngle = 0, Direction direction = CounterClockWise);
+        Arc(const Point& center = Point(), double radius = 0.0, const Angle& startAngle = 0.0, const Angle& endAngle = 360.0, E_Direction direction = CounterClockWise);
 
         bool isAngleBetween(Angle angle) const;
         double length() const;

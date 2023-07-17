@@ -9,7 +9,7 @@
 namespace callib {
     class GraphObject {
     public:
-        virtual GraphType getType() const = 0;
+        virtual E_GraphType getType() const = 0;
         virtual std::string getTypeName() const;
 
     };

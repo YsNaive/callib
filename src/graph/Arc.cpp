@@ -2,20 +2,20 @@
 
 namespace callib {
 
-    Arc::Arc(const Point& center, double radius, const Angle& startAngle, const Angle& endAngle, Direction direction)
+    Arc::Arc(const Point& center, double radius, const Angle& startAngle, const Angle& endAngle, E_Direction direction)
         : center(center), radius(radius), beginAngle(startAngle), endAngle(endAngle), direction(direction) {}
 
     bool Arc::isAngleBetween(Angle angle) const
     {
         double now, gap;
-        now = callibRound(angle - beginAngle);
-        gap = callibRound(endAngle - beginAngle);
+        now = angle - beginAngle;
+        gap = endAngle - beginAngle;
 
-        if (direction == Direction::CounterClockWise) {
-            return now <= gap;
+        if (direction == E_Direction::CounterClockWise) {
+            return ((now < gap) || (lf_equal(now, gap)));
         }
         else {
-            return (now == 0)||(now >= gap);
+            return ((now == 0) || (now > gap) || lf_equal(now, gap));
         }
     }
 

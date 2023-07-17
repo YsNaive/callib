@@ -4,7 +4,7 @@ namespace callib {
 	GraphIntersection::GraphIntersection(const GraphObject& a, const GraphObject& b)
 	{
 		bool hasImplement = true;
-		GraphType atype = a.getType(), btype = b.getType();
+		E_GraphType atype = a.getType(), btype = b.getType();
 		if (atype == POINT) {
 			if (btype ==		LINE)	points = GraphIntersection::calculate((Point&)(a), (Line&)(b));
 			//else if (btype ==	ARC)	points = GraphIntersection::calculate((Point&)(a), (Arc&)(b));
@@ -34,7 +34,7 @@ namespace callib {
 	std::vector<Point> GraphIntersection::calculate(const Point& a, const Line& b) {
 		std::vector<Point> out;
 		auto equ = b.equation();
-		if (callibRound(a.y) == callibRound(equ.a * a.x + equ.b)) {
+		if (lf_equal(a.y, equ.a * a.x + equ.b) || (equ.isVertical && (a.x == b.begin.x))) {
 			if ((a.x >= std::min(b.begin.x, b.end.x)) &&
 				(a.x <= std::max(b.begin.x, b.end.x)) &&
 				(a.y >= std::min(b.begin.y, b.end.y)) &&
@@ -47,7 +47,7 @@ namespace callib {
 	std::vector<Point> GraphIntersection::calculate(const Point& a, const Arc& b)
 	{
 		std::vector<Point> out;
-		if (callibRound(Line(a, b.center).length()) == callibRound(b.radius)) {
+		if (lf_equal(Line(a, b.center).length(), b.radius)) {
 			if (b.isAngleBetween(Angle(b.center, a)))
 				out.push_back(a);
 		}
@@ -69,7 +69,6 @@ namespace callib {
 		double y4 = b.end.y;
 
 		double d = (x1 - x2) * (y3 - y4) - (y1 - y2) * (x3 - x4);
-
 		// 如果分母為零，則兩線段平行或共線，無交點
 		if (d != 0) {
 			double numerator1 = (x1 * y2 - y1 * x2) * (x3 - x4) - (x1 - x2) * (x3 * y4 - y3 * x4);
@@ -127,7 +126,7 @@ namespace callib {
 		double mx = a.center.x + d * (b.center.x - a.center.x) / len;
 		double my = a.center.y + d * (b.center.y - a.center.y) / len;
 
-		if (callibRound(len) == callibRound(a.radius + b.radius)) {
+		if (lf_equal(len, a.radius + b.radius)) {
 			Point p = Point(mx, my);
 			if(a.isAngleBetween(Angle(a.center,p)) && b.isAngleBetween(Angle(b.center,p)))
 				out.push_back(p);
@@ -156,7 +155,7 @@ namespace callib {
 
 	std::ostream& operator<<(std::ostream& os, const GraphIntersection& intersection)
 	{
-		os << intersection.intersectionCount << " intersection: ";
+		os << intersection.intersectionCount << " intersection: " << ((intersection.intersectionCount==0)?"none":"");
 		for (auto &p : intersection.points)
 			os << p << ' ';
 		return os;

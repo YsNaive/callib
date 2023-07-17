@@ -3,5 +3,6 @@
 
 #include "callibcore.h"
 #include "callibGraph.h"
+#include "callibGate.h"
 
 #endif // CALLIB_CALLIBALL_H

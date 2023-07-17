@@ -9,7 +9,7 @@
 namespace callib {
     class Rect : public GraphObject{
     public:
-        GraphType getType() const { return GraphType::RECT; };
+        E_GraphType getType() const { return E_GraphType::RECT; };
 
         double x;
         double y;

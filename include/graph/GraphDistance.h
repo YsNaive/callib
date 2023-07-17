@@ -11,9 +11,13 @@ namespace callib {
 
     class GraphDistance {
     public:
-        double distance;
-        Line line;
+        const GraphObject *a, *b;
+        const Line line;
+        const double distance;
+
         GraphDistance(const GraphObject& a, const GraphObject& b);
+
+        static Line calculate(const GraphObject& a, const GraphObject& b);
 
         static Line calculate(const Point& a, const Point& b);
         static Line calculate(const Point& a, const Line& b);
