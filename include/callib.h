@@ -5,4 +5,7 @@
 #include "callibGraph.h"
 #include "callibGate.h"
 
+#include "misc/Action.h";
+#include "misc/Event.h"
+
 #endif // CALLIB_CALLIBALL_H

@@ -10,6 +10,7 @@ set(CMAKE_CXX_STANDARD_REQUIRED ON)
 include_directories(${CMAKE_SOURCE_DIR}/include)
 include_directories(${CMAKE_SOURCE_DIR}/include/graph)
 include_directories(${CMAKE_SOURCE_DIR}/include/gate)
+include_directories(${CMAKE_SOURCE_DIR}/include/msic)
 file(GLOB_RECURSE SOURCE_FILES ${CMAKE_SOURCE_DIR}/src/*.cpp)
 
 # exe
