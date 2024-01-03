@@ -7,19 +7,27 @@ namespace callib {
 	template<typename... _args>
 	class Action
 	{
+		typedef std::function<void(_args...)> FType;
 	protected:
-		std::function<void(_args...)> func;
+		FType* func;
 		void* funcPtr = nullptr;
+		void* target;
 	public:
 		template<typename _fun>
 		Action(_fun&& lam)
-			: func(lam), funcPtr(&lam) {}
+			: func(new FType(lam)), funcPtr(&lam){
+			target = func->target<_fun>();
+		}
+		~Action() {
+			delete func;
+		}
 
 		void Invoke(const _args&... args) {
-			func(args...);
+			(*func)(args...);
 		}
 		void* FuncPtr() const { return funcPtr; }
-		std::string TypeName() const { return func.target_type().name(); }
+		void* Target() const { return target; }
+		std::string TypeName() const { return func->target_type().name(); }
 
 		void operator() (const _args&... args) {
 			Invoke(args...);
@@ -41,6 +49,7 @@ namespace callib {
 
 	template<typename... _args>
 	bool operator< (const Action<_args...>& first, const Action<_args...>& second) {
+		cout << first.Target() << ' ' << second.Target() << '\n';
 		return (first.FuncPtr() < second.FuncPtr());
 	}
 
